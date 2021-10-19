@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:messagegame_app/screens/chat_screen.dart';
 import 'package:messagegame_app/widgets/my_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SigInScreen extends StatefulWidget {
   static const String screenRoute = 'sigin_screen';
@@ -12,6 +14,9 @@ class SigInScreen extends StatefulWidget {
 }
 
 class _SigInScreenState extends State<SigInScreen> {
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +37,11 @@ class _SigInScreenState extends State<SigInScreen> {
               height: 0.04 * MediaQuery.of(context).size.width,
             ),
             TextField(
+              keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
               // ignore: prefer_const_constructors
               decoration: InputDecoration(
                 hintText: 'Enter Your Email',
@@ -62,11 +70,14 @@ class _SigInScreenState extends State<SigInScreen> {
               height: 0.05 * MediaQuery.of(context).size.width,
             ),
             TextField(
+              obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
               // ignore: prefer_const_constructors
               decoration: InputDecoration(
-                hintText: 'Enter Your Email',
+                hintText: 'Enter Your Password',
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 border: const OutlineInputBorder(
@@ -92,7 +103,19 @@ class _SigInScreenState extends State<SigInScreen> {
               height: 0.05 * MediaQuery.of(context).size.width,
             ),
             MyButton(
-                color: Colors.yellow[800]!, title: 'Sign In', onPressed: () {})
+                color: Colors.yellow[800]!,
+                title: 'Sign In',
+                onPressed: () async {
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    if (user != null) {
+                      Navigator.pushNamed(context, ChatScreen.screenRoute);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                }),
           ],
         ),
       ),

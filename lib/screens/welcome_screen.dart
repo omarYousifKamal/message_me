@@ -55,18 +55,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 onPressed: () {
                   Navigator.pushNamed(context, RigistrationScreen.screenRoute);
                 }),
-            MyButton(
-                color: Colors.blue,
-                title: 'register',
-                onPressed: () {
-                  Navigator.pushNamed(context, RigistrationScreen.screenRoute);
-                }),
-            MyButton(
-                color: Colors.blue,
-                title: 'register',
-                onPressed: () {
-                  Navigator.pushNamed(context, RigistrationScreen.screenRoute);
-                })
           ],
         ),
       ),

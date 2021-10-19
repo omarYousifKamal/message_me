@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String screenRoute = 'chat_screen';
@@ -10,6 +11,29 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final _auth = FirebaseAuth.instance;
+  late User signedInUser;
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  //فه‌حسی ده‌كات ئایه‌ به‌كارهێنه‌ر هاتیته‌ ناو ئه‌پ یان نا
+  //لێره‌ش ته‌نها ئه‌و یوسه‌ه‌ وه‌ده‌گری كه ناوی تۆمار كردیه
+  void getCurrentUser() {
+    try {
+      final user = _auth.currentUser;
+
+      if (user != null) {
+        signedInUser = user;
+        print(signedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Image.asset('images/logo.png', height: 25),
             SizedBox(width: 10),
-            Text('MessageMe')
+            Text('MessageMe'),
           ],
         ),
         actions: [

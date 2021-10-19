@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:messagegame_app/screens/chat_screen.dart';
 import 'package:messagegame_app/widgets/my_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RigistrationScreen extends StatefulWidget {
   static const String screenRoute = 'registration_screen';
@@ -11,6 +13,11 @@ class RigistrationScreen extends StatefulWidget {
 }
 
 class _RigistrationScreenState extends State<RigistrationScreen> {
+  //لێره داوای ئیمیل و پاسۆرد ده‌كه‌ی خه‌زنی ده‌كات
+  final _auth = FirebaseAuth.instance;
+
+  late String email;
+  late String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +38,11 @@ class _RigistrationScreenState extends State<RigistrationScreen> {
               height: 0.04 * MediaQuery.of(context).size.width,
             ),
             TextField(
+              keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
               // ignore: prefer_const_constructors
               decoration: InputDecoration(
                 hintText: 'Enter Your Email',
@@ -61,11 +71,14 @@ class _RigistrationScreenState extends State<RigistrationScreen> {
               height: 0.05 * MediaQuery.of(context).size.width,
             ),
             TextField(
+              obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
               // ignore: prefer_const_constructors
               decoration: InputDecoration(
-                hintText: 'Enter Your Email',
+                hintText: 'Enter Your password',
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 border: const OutlineInputBorder(
@@ -91,7 +104,20 @@ class _RigistrationScreenState extends State<RigistrationScreen> {
               height: 0.05 * MediaQuery.of(context).size.width,
             ),
             MyButton(
-                color: Colors.blue[800]!, title: 'Register', onPressed: () {})
+                color: Colors.blue[800]!,
+                title: 'Register',
+                onPressed: () async {
+                  // print(email);
+                  // print(password);
+                  try {
+                    final newUSer = await _auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
+                    //لێره پاش داخل كدن ده‌تباته‌ چات سكرین
+                    Navigator.pushNamed(context, ChatScreen.screenRoute);
+                  } catch (e) {
+                    print(e);
+                  }
+                })
           ],
         ),
       ),

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "264670063443",
+    "project_id": "messageme-app-a22ad",
+    "storage_bucket": "messageme-app-a22ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264670063443:android:57b382a2ba590fe9fc8fa6",
+        "android_client_info": {
+          "package_name": "com.bannaomar.messagegame_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264670063443-pfqdcqh9701doa67vvnl16c8q6voia7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIELkMXF_HRnlV_j02dTOWOTJBN3LCw-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264670063443-pfqdcqh9701doa67vvnl16c8q6voia7f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
