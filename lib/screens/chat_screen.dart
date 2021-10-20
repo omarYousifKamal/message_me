@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messagegame_app/screens/signin_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String screenRoute = 'chat_screen';
@@ -49,7 +50,8 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // add here logout function
+              _auth.signOut();
+              Navigator.pop(context);
             },
             icon: Icon(Icons.close),
           )
