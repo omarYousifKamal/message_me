@@ -4,6 +4,7 @@ import 'package:messagegame_app/screens/registration_screen.dart';
 import 'package:messagegame_app/screens/signin_screen.dart';
 import 'package:messagegame_app/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 //omar omar omar
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
